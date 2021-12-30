@@ -1,11 +1,11 @@
-from product import Expense
+from expense import Expense
 
 
 def show_expenditure(values: list) -> None:
     for data in values:
-        print("------------\n"
-              f"Nome: {data.get('name')}\n"
-              f"Preço: {data.get('value')}")
+        for key, value in data.items():
+            print("------------\n"
+                  f"{key}: {value}\n")
 
 
 def format_price(value: float):
@@ -18,16 +18,32 @@ def format_price(value: float):
 
 
 def calculate_expenses(expenditure_list: list, people: list):
-    response = list()
+    """
+    THis function sum the expenditure and create a dict.
+    The dict keys are the people name, and the value is the expense that the person is going to pay
+    :param expenditure_list: list os expense objects
+    :param people: list of string that represents the name of a person.
+    :return: A dict. The key is the person name, and value is the price of expense to pay
+    """
+    response = dict()
     person_quantity = len(people)
 
     for expense in expenditure_list:
-        value_to_pay = (expense.price * expense.quantity) / person_quantity
+        total = expense.price * expense.quantity  # total of expense
+        value_to_pay = total / person_quantity  # price tha each person is going to pay
+        rest = total % person_quantity  # Check if the expense total can be divided equally.
 
-        for person in people:
-            response.append({"name": person, "value": format_price(value_to_pay)})
+        for index, person in enumerate(people):
+            if str(person) in response:
+                response.update({str(person): value_to_pay + response[person]})
+            else:
+                response.update({str(person): value_to_pay})
 
-    show_expenditure(response)
+            if index == (len(people) - 1) and rest != 0:
+                # If this person is the last one, and there is rest in the expense, the rest go to this person
+                response.update({str(person): response[person] + rest * 100})
+    print(response)
+#    show_expenditure(response)
 
 
 lista = [
