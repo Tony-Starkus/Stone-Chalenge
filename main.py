@@ -1,16 +1,15 @@
 from expense import Expense
 
 
-def show_expenditure(values: list) -> None:
-    for data in values:
-        for key, value in data.items():
-            print("------------\n"
-                  f"{key}: {value}\n")
+def show_expenditure(values: dict) -> None:
+    for key, value in values.items():
+        print("------------\n"
+              f"{key}: {format_price(value)}")
 
 
 def format_price(value: float):
     """
-    Show the result
+    Format the price to brazillian format. Ex: R$ 1,00
     :param value: a dict with the name or the person and the value to pay
     :return: None
     """
@@ -32,6 +31,9 @@ def calculate_expenses(expenditure_list: list, people: list):
         total = expense.price * expense.quantity  # total of expense
         value_to_pay = total / person_quantity  # price tha each person is going to pay
         rest = total % person_quantity  # Check if the expense total can be divided equally.
+        print(f"{total=}")
+        print(f"{value_to_pay=}")
+        print(f"{rest=}")
 
         for index, person in enumerate(people):
             if str(person) in response:
@@ -41,9 +43,9 @@ def calculate_expenses(expenditure_list: list, people: list):
 
             if index == (len(people) - 1) and rest != 0:
                 # If this person is the last one, and there is rest in the expense, the rest go to this person
-                response.update({str(person): response[person] + rest * 100})
+                response.update({str(person): response[person] + rest})
     print(response)
-#    show_expenditure(response)
+    show_expenditure(response)
 
 
 lista = [
@@ -64,8 +66,16 @@ lista = [
     }
 ]
 
+lista1 = [
+    {
+        "nome": "Almoço self-service",
+        "quantidade": "1",
+        "valor_unitario": "R$ 1,00"
+    }
+]
+
 expenditure = list()
-person_names = ["Thalixo", "Trindadé", "Jhol pow pow", "Ita pow pow"]
+person_names = ["Thalixo", "Trindadé", "Jhol pow pow", "Ita pou pou"]
 for item in lista:
     expenditure.append(Expense(item["nome"], item["quantidade"], item["valor_unitario"]))
 
