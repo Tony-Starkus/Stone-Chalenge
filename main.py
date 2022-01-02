@@ -31,7 +31,7 @@ def format_price(value: float):
     return "R$ {:.2f}".format(value / 100).replace(".", ",")
 
 
-def calculate_expenses(expenditure_list: list, people: list):
+def calculate_expenses(expenditure_list: list, people: list) -> dict:
     """
     THis function sum the expenditure and create a dict.
     The dict keys are the people name, and the value is the expense that the person is going to pay
@@ -72,6 +72,7 @@ def calculate_expenses(expenditure_list: list, people: list):
             if rebalance == 0.01:
                 break
     show_expenditure(response)
+    return response
 
 
 # Here we are creating an Expense object.
