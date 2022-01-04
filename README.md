@@ -36,7 +36,7 @@ An expense dict has 3 values
 
 ### Unit test
 
-Unit tests can be founded on `test.py`. You can run it with the following command:
+Unit tests can be find on `test.py`. You can run it with the following command:
 ```
 $ pytest test.py
 ```
