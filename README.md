@@ -1,4 +1,4 @@
-# Stone-Chalenge
+# Stone-Challenge
 
 This algorithm was created to resolve a Stone challenge.
 
