@@ -4,7 +4,7 @@ from utils.functions import calculate_expenses
 expenditure = list()
 
 # List of people
-people_names = ["Thalixo", "Trindadé", "Jhol pow pow", "Ita pou pou"]
+people_names = ["Ana", "Bruno", "João", "Carlos"]
 
 # This variable is an array of dicts. Each dict represents an expense.
 input_values = [{"nome": "Passeio de escuna", "quantidade": 5, "valor_unitario": "R$ 80,33"},
